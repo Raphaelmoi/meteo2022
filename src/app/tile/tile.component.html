@@ -1,0 +1,66 @@
+<a class="tile" [href]="UtilsService.getPageLink(place)" [title]="place.name_input ||  place.name " *ngIf="place"
+  [class]="{'isMyPosition' : GeolocalisationService.position_result_id === place.id}">
+
+  <div class="w_img" *ngIf="place.weather && place.weather.length">
+    <img [src]="WeatherService.getWeatherIcon(place.weather[0].icon)" alt="" />
+    <span>{{ place.weather[0].description | titlecase }}</span>
+  </div>
+
+  <div class="topbar_tile">
+    <span class="hour">{{ DateService.getHour(place.dt) }}</span>
+    <div style="display: flex">
+      <span class="btn_delete myPosition" *ngIf="GeolocalisationService.position_result_id === place.id"
+        title="Ma position actuelle">
+        <img src="/assets/icones/marker.svg" alt="" loading="lazy" width="20" />
+      </span>
+
+      <span class="btn_delete" (click)="onCenterTileOnMap($event)">
+        <img src="/assets/icones/map.png" alt="" loading="lazy" width="20" />
+      </span>
+      <span class="btn_delete" (click)="onDeleteCity($event)">
+        <img src="/assets/icones/trash.svg" loading="lazy" width="12" />
+      </span>
+    </div>
+  </div>
+
+  <div class="temp" *ngIf="place.main">
+    <span>{{ place.main.temp | number: "1.0-0" }}°</span>
+    <div class="subtemp">
+      <span>
+        Ressentie : <b>{{ place.main.feels_like | number: "1.0-0" }}°</b>
+      </span>
+      <span>
+        Min : <b>{{ place.main.temp_min | number: "1.0-0" }}°</b>
+      </span>
+      <span>
+        Max : <b>{{ place.main.temp_max | number: "1.0-0" }}°</b>
+      </span>
+    </div>
+  </div>
+
+  <div class="w_placename">
+    <h2>{{ place.name_input || place.name }}</h2>
+    <img *ngIf="place.sys && place.sys.country" [src]="WeatherService.getFlag(place.sys.country)"
+      (error)="onImgError($event)" loading="lazy" />
+    <p class="stationName"
+      *ngIf="place.name_input && place.name_input !== place.name && !place.name.includes('_position_')">
+      ({{ place.name }})
+    </p>
+  </div>
+
+  <div class="bottom_infos">
+    <span *ngIf="place.wind">
+      <img src="/assets/icones/arrow.png" alt="" height="30" width="30"
+        [style.transform]="'rotate(' + place.wind.deg + 'deg)'" />
+      {{ (place.wind.speed * 3600) / 1000 | number: "1.0-0" }} km/h
+    </span>
+    <span *ngIf="place.sys">
+      <img src="/assets/icones/lever-soleil.png" alt="" />
+      {{ DateService.getHour(place.sys.sunrise) }} h
+    </span>
+    <span *ngIf="place.sys">
+      <img src="/assets/icones/coucher-soleil.png" alt="" />
+      {{ DateService.getHour(place.sys.sunset) }} h
+    </span>
+  </div>
+</a>

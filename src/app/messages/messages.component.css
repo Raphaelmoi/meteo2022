@@ -1,0 +1,27 @@
+.msgPanel {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: white;
+	box-shadow: 0 0 8px #7777;
+	padding: .5em 0;
+	z-index: 5;
+}
+.clear {
+	color: #333;
+	background-color: #eee;
+	margin-top: 12px;
+	margin-left: auto;
+	padding: .2rem 1rem;
+	border-radius: 4px;
+	font-size: 1rem;
+	transition: .3s ease;
+	cursor: pointer;
+	border: 2px var(--color-1) solid;
+	float: right;
+}
+.clear:hover {
+	color: white;
+	background-color: var(--color-1);
+}

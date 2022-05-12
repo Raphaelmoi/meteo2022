@@ -1,0 +1,267 @@
+.tile_weather {
+	position: relative;
+	box-shadow: 0 0 8px #cccc;
+	background: var(--color-1-25);
+	color: inherit;
+	text-decoration: none;
+	--day-color: --color-1;
+}
+
+.tile_content {
+	padding: 0.25em 1em;
+}
+
+.btn_delete {
+	border: 1px;
+	padding: 4px 8px;
+	cursor: pointer;
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	background-color: white;
+	border-radius: 4px;
+	text-transform: uppercase;
+	font-size: 0.7em;
+}
+
+.tile_weather h2 {
+	margin: 0;
+	text-transform: uppercase;
+	font-weight: 300;
+	overflow-wrap: break-word;
+}
+
+.tile_weather p {
+	margin: 0;
+}
+
+.line {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.temperature {
+	font-family: "Architects Daughter", cursive;
+	font-size: 3em;
+	line-height: 1em;
+	text-align: center;
+	margin: 0 0 0 8px;
+	align-self: flex-start;
+	background: #fff;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.temperature span {
+	font-size: 0.5em;
+	display: block;
+}
+
+.temperature .subTemp {
+	font-size: 0.5em;
+	line-height: .5em;
+}
+
+.day_stats_preview {
+	background: #fff;
+	width: calc(100% - 2em);
+	font-size: 0.7em;
+	padding: 4px 1em;
+	margin: 2em 0;
+	border-bottom: 2px var(--color-1) solid;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.day_stats_preview>div {
+	display: flex;
+	align-items: center;
+}
+
+.scroller_container {
+	position: relative;
+}
+
+.h_scroller {
+	position: relative;
+	overflow-x: auto;
+	margin: 8px 0;
+	scroll-behavior: smooth;
+}
+
+.h_scroller>* {
+	display: inline-flex;
+	background: white;
+	box-shadow: inset 0 0 8px 0 #ccc;
+}
+
+.scroller_container .hs_control {
+	position: absolute;
+	top: 50%;
+	left: -18px;
+	width: 18px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: translateY(-50%);
+	border: 2px var(--color-1-75) solid;
+	background: var(--color-1);
+	font-size: 0.7em;
+	font-weight: bold;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+.scroller_container .hs_control:hover {
+	background: var(--color-1-50);
+}
+
+.scroller_container .hs_control.left {
+	border-right: 0;
+	border-bottom-left-radius: 10px;
+	border-top-left-radius: 10px;
+}
+
+.scroller_container .hs_control.right {
+	left: 100%;
+	border-left: 0;
+	border-bottom-right-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.forecast_mini_tile {
+	font-size: 0.9em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	width: 140px;
+	padding-top: 8px;
+}
+
+.forecast_mini_tile:nth-child(even) {
+	background: #0001;
+}
+
+.hours_mt {
+	font-size: 1.1em;
+	margin: 4px 0;
+}
+
+.day_mt {
+	background: var(--day-color);
+	width: 100%;
+}
+
+.weather_mt {
+	width: 100%;
+}
+
+.weather {
+	background: var(--color-1-50);
+	height: 50px;
+	margin: 25px 0;
+	padding: 0 1em;
+	font-size: 0.9em;
+	text-align: center;
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.imgboxW {
+	background: var(--color-1-75);
+	border: 2px var(--color-1) solid;
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	margin-left: -2.9em;
+}
+
+.imgboxW img {
+	width: 100%;
+}
+
+.weather span:not(.btn_delete) {
+	padding-left: 1em;
+}
+
+.current_tw {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.current_tw .current_desc {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.current_tw .current_desc img {
+	margin: 0 4px;
+}
+
+.current_tw .current_desc h2 {
+	width: 100%;
+	text-align: center;
+	font-size: 2.5em;
+}
+
+.graph_temp {
+	width: 100px;
+	height: 100px;
+	/* background: gold; */
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	position: relative;
+}
+
+.graph_temp img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	object-fit: contain;
+	filter: drop-shadow(0 0 12px rgb(194, 193, 193));
+}
+
+.temp_miniTile {
+	position: relative;
+	font-size: 1.3em;
+	font-weight: bold;
+	margin: .5em;
+}
+
+.lundi,
+.jeudi {
+	--day-color: var(--color-1-50);
+}
+
+.mardi,
+.vendredi {
+	--day-color: var(--color-1-25);
+}
+
+.samedi,
+.mercredi {
+	--day-color: var(--color-1);
+}
+
+.dimanche {
+	--day-color: var(--color-1-75);
+}

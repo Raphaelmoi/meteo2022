@@ -1,0 +1,107 @@
+<div class="site_container">
+
+  <div class="tile_weather">
+    <div class="weather" *ngIf="ws_result && ws_result.weather">
+      <div class="imgboxW">
+        <img [src]="WeatherService.getWeatherIcon(ws_result.weather[0].icon, 4)" alt="" />
+      </div>
+      <span>
+        <b>{{ ws_result.weather[0].description | titlecase }}</b>
+      </span>
+
+      <div class="btn" *ngIf="isFavorite(); else isNotFavorite" (click)="removeFromFavorite()"
+        title="Supprimer des favoris">
+        <img src="/assets/icones/trash.svg" alt="" height="16" loading="lazy" />
+      </div>
+      <ng-template #isNotFavorite>
+        <div class="btn" (click)="addToFavorite()">Ajouter aux favoris</div>
+      </ng-template>
+    </div>
+
+    <div class="tile_content current_tw" *ngIf="ws_result">
+      <div class="current_desc">
+        <h2>{{ ws_result.name }}</h2>
+        <img [src]="WeatherService.getFlag(ws_result.sys.country)" (error)="onImgError($event)" loading="lazy" />
+        <p>{{ DateService.getHour(ws_result.dt) }}</p>
+      </div>
+
+      <div class="temperature" style="line-height: unset;">
+        <img src="/assets/icones/arrow.png" alt="" height="70" width="70"
+          [style.transform]="'rotate(' + ws_result.wind.deg + 'deg)'" />
+
+        <span style="font-size: .7em; line-height: .7em;">{{ (ws_result.wind.speed * 3600) / 1000 | number: "1.0-0"
+          }}<br />
+          <small style="font-size:.5em;">km/h</small>
+        </span>
+      </div>
+
+      <div class="temperature">
+        {{ ws_result.main.temp | number: "1.0-0" }}°
+        <div class="subTemp">
+          <span>Ressentie : {{ ws_result.main.feels_like | number: "1.0-0" }}°</span>
+          <span>min. : {{ ws_result.main.temp_min | number: "1.0-0" }}°</span>
+          <span>max. : {{ ws_result.main.temp_max | number: "1.0-0" }}°</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="day_stats_preview" *ngIf="ws_result && ws_result.sys">
+      <div class="">
+        <img src="/assets/icones/lever-soleil.png" alt="" height="30" width="30" />
+        Lever du soleil :
+        {{ DateService.getHour(ws_result.sys.sunrise) }} h
+      </div>
+      <div class="">
+        <img src="/assets/icones/coucher-soleil.png" alt="" height="30" width="30" />
+        Coucher du soleil :
+        {{ DateService.getHour(ws_result.sys.sunset) }} h
+      </div>
+    </div>
+
+    <div class="tile_content" style="font-size: 0.6em; padding: 0 1em">
+      Ces prochaines heures :
+    </div>
+
+    <div class="scroller_container">
+      <div class="hs_control left" (click)="scrollManager(-1, $event)"></div>
+      <div class="hs_control right" (click)="scrollManager(1, $event)">></div>
+      <div class="h_scroller" *ngIf="forecast.length">
+        <div>
+          <!-- **************************************************************** -->
+          <!-- **************************************************************** -->
+          <div *ngFor="let f of forecast[0].list" class="forecast_mini_tile" [class]="DateService.getDayWord(f.dt)">
+            <div class="hours_mt">
+              <b>{{ DateService.getHour(f.dt) }}</b>
+            </div>
+            <div class="day_mt">
+              {{ DateService.getDay(f.dt) }}
+            </div>
+
+            <span *ngIf="f.main" class="temp_miniTile">{{ f.main.temp | number: "1.0-0" }}°</span>
+
+            <div style="display: flex; margin: 1em 0">
+              <div class="graph_temp" [style.marginTop]="getGraduationCss(f.main.temp)" *ngIf="f.weather">
+                <img [src]="WeatherService.getWeatherIcon(f.weather[0].icon)" alt="" />
+              </div>
+            </div>
+
+            <span class="" style="margin: auto 0 .5em">
+              <img src="/assets/icones/arrow.png" alt="" height="20" width="20"
+                [style.transform]="'rotate(' + f.wind.deg + 'deg)'" /><br />
+              {{ (f.wind.speed * 3600) / 1000 | number: "1.0-0" }} km/h
+            </span>
+          </div>
+          <!-- **************************************************************** -->
+          <!-- **************************************************************** -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />
+<br />
+<br />
+<app-map [tiles_length]="WeatherService.weather_data.length" [zoomto]="ws_result.coord"
+  *ngIf="ws_result && ws_result.coord"></app-map>

@@ -1,0 +1,80 @@
+<header class="header_site">
+  <div class="site_container">
+    <app-search-city></app-search-city>
+  </div>
+</header>
+
+<router-outlet></router-outlet>
+<app-messages></app-messages>
+
+
+
+<div style="background:#fff">
+  <div class="site_container">
+    <div style="padding: 2em 0; font-size: .8em;">
+      <p>
+        <b>NOTES </b><br />
+        Site réalisé avec Angular 13.<br />
+        L'API météo utilisée est openweathermap.<br />
+        <!-- <small>
+        Appel via le nom de ville pour la recherche libre<br/>
+        Appel via coordonnées pour les villes proposées en résultat de recherche ou via la carte<br/>
+        Appel via id pour mettre à jour les données stockées<br/>
+      </small>
+      <br/> -->
+        Pour les villes francaise proposées dans le champs de recherche, l'API utilisée est geo.api.gouv.fr.<br />
+        Carte : leaflet.js. <br />
+        Les drapeaux associés à chaque ville viennent de l'API flagcdn.com
+      </p>
+    </div>
+  </div>
+</div>
+<!-- 
+<div [style]="{ background: '#e9faff', padding: '2em 0' }">
+  <div class="site_container">
+    <b>TODO : </b><br />
+
+    <span>Brancher les filtres de carte : pouvoir supprimer un layer, pas de deuplic </span>
+    <span>responsive design</span><br />
+    <del>Pouvoir supprimer tous les favoris</del><br />
+    <span>debugger /albi?id=2525757 avec albi fr</span><br />
+    <del>resultat recherche : proposer d'ouvrir la page détail</del><br />
+    <span>unit test</span><br />
+    <del>ajouter / supprimer des favoris depuis page detail</del><br />
+    <span>ngDestroy ?</span> <br />
+    <span>Branchement dune visualisation sattelite de carte en direct ?</span><br />
+    <del>sur tuile position actuelle ajouté une indication</del><br />
+    <del>en cas de lat long incorecttes les resulats suivant sont bloqués</del><br />
+    <del>bug lien popup carte</del><br />
+    <del>_position_ dans ce cas verifier position</del><br />
+    <del>Accueil quand 0 resultat</del><br />
+    <del>Vérifier derniers doublons (paris, londres ) </del><br />
+    <del>pour icone weather ne recuperer que le 1er element pas de boucle</del><br />
+    <del>ne pas perdre le name_input dans page detail</del><br />
+    <del>page chargement quand les données ne sont pas là ou vide </del><br />
+    <del>z-index des messages d'erreur</del><br />
+    <del>pouvoir utiliser fleches dans les resultats proposés de ville</del><br />
+
+    <del>ajouter zoom vers les villes</del><br />
+    <del>centrage vers la bonne vile sur carte page detail</del>
+    <del>page detail</del><br />
+    <del>Placement sur une carte leaflet</del><br />
+    <del>listing / detail</del><br />
+    <del>API das villes</del><br />
+    <del>Recherche de ville</del> <br />
+    <del>Stockage des villes choisies au moins en local</del><br />
+    <del>Géoloc</del><br />
+    <del>ne pas permettre les doublons</del><br />
+    <del>brancher weatther API et >forecast</del><br />
+    <del>Branchements de toutes les valeurs</del><br />
+    <del>
+      Stocker le résultat de la géoloc / ou plutot récuperer à chaque ouverture
+    </del>
+    <br />
+    <del>brancher api drapeaux </del><br />
+    <del>récupérer résultats et enregistrer ville par la position et non par le
+      nom de ville</del><br />
+    <del>Décalage quand on a les 2 belaye et qu'on recharge : devient prayssac et
+      ZIGUINCHOR </del><br />
+  </div>
+</div> -->

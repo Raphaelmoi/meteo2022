@@ -1,0 +1,34 @@
+<div *ngIf="!WeatherService.weather_data.length" class="site_container welcomeMsg">
+  <b>
+    Bienvenue sur ma météo !
+  </b>
+  <br />
+  <div style="width:800px; max-width:100%; text-align: left; font-size: .9em;">
+    Pour commencer vous pouvez : <br />
+    <ul>
+      <li>Choisir une ville via la barre de recherche. </li>
+      <li>Vous géolocaliser.</li>
+      <li>Cliquer sur la position de votre choix sur la carte ci-dessous.</li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="WeatherService.data_loading" class="loading">
+  Chargement en cours ....
+</div>
+
+
+
+<div class="site_container grid_weather">
+  <app-tile *ngFor="let place of WeatherService.weather_data" [place]="place">
+  </app-tile>
+</div>
+
+<div class="site_container" style="display:flex;font-size:.7em; margin:0 0 8px"
+  *ngIf="WeatherService.weather_data.length > 3">
+  <div (click)="WeatherService.deleteAll()" class="btn">
+    Supprimer tous les résultats
+  </div>
+</div>
+
+<app-map [tiles_length]="WeatherService.weather_data.length" [zoomto]="coords"></app-map>

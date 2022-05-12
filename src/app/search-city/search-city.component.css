@@ -1,0 +1,73 @@
+.search_city {
+	display: flex;
+	justify-content: center;
+	margin: 2em 0;
+}
+.search_city > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+.cities_autocomplete {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	background: white;
+	z-index: 3;
+	padding: .5em 0;
+}
+.cities_autocomplete > div {
+	cursor: pointer;
+	transition: .3s ease;
+	padding: 0 .5em;
+}
+.cities_autocomplete > div.active,
+.cities_autocomplete > div:hover {
+	background: #ddd;
+}
+.search_city input {
+	border: none;
+	text-transform: uppercase;
+	width: 500px;
+	max-width: 90vw;
+	/* margin: 0 0 0 1em; */
+	outline: none;
+	padding: 1em;
+	background: #fff9;
+	box-shadow: 0 0 8px #0002;
+}
+.search_city input:focus {
+	background: #fffd;
+}
+.search_city button {
+	width: 42px;
+	height: 42px;
+	cursor: pointer;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	background: var(--color-1-50);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: .5s ease;
+	box-shadow: 0 0 8px #0002;
+	z-index: 1;
+}
+.search_city button.btnGeo {
+	padding: 0 .5em;
+	margin-left: 1.5em;
+	width: auto;
+	background: #fff9;
+}
+.search_city button:hover {
+	background: var(--color-1);
+}
+
+.lienHome {
+	text-decoration: none;
+	color: #111;
+	margin-right: 1.5em;
+}

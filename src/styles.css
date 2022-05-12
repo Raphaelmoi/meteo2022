@@ -1,0 +1,110 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+	font-size: 20px;
+	margin: 0;
+	padding: 0;
+	font-family: "Open Sans", sans-serif;
+	scroll-behavior: smooth;
+	background: linear-gradient(to right top, #e6ebf2, #cad8ec, var(--color-1-50), #6fa3da00, #cad8ec);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Architects Daughter", cursive;
+	margin: 0;
+	font-weight: 300;
+}
+
+a {
+	color: inherit;
+}
+
+:root {
+	--color-1: rgb(143, 180, 224);
+	--color-1-75: rgba(143, 180, 224, 0.75);
+	--color-1-50: rgba(143, 180, 224, 0.5);
+	--color-1-25: rgba(143, 180, 224, 0.25);
+	--container-space: 10%;
+	scrollbar-color: var(--color-1) #eee;
+	scrollbar-width: 18px;
+}
+
+::-webkit-scrollbar {
+	height: 12px;
+	width: 12px;
+	background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--color-1);
+	-webkit-border-radius: 1em;
+	border-radius: 1em;
+}
+
+::-webkit-scrollbar-corner {
+	background: #fff;
+}
+
+.site_container {
+	margin: 0 var(--container-space);
+	width: calc(100% - var(--container-space) * 2);
+}
+
+@media all and (max-width: 1500px) {
+	:root {
+		--container-space: 4%;
+	}
+}
+
+.leaflet-container .leaflet-layer:first-child {
+	filter: saturate(0.5);
+}
+
+.leaflet-container a {
+	color: #111 !important;
+	text-decoration: none;
+	text-align: center;
+}
+
+.leaflet-container a:hover {
+	text-decoration: underline;
+}
+
+.leaflet-container a img {
+	width: 100%;
+	height: 100px;
+	object-fit: contain;
+}
+
+.leaflet-container .leaflet-marker-pane img {
+	filter: drop-shadow(2px 4px 6px #0009);
+}
+
+.loading {
+	padding: 1em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #fff;
+	margin: 1em 0;
+}
+
+.btn {
+	background: white;
+	padding: 4px 12px;
+	border-radius: 4px;
+	margin: 0 4px;
+	margin-left: auto;
+	transition: .3s ease;
+	cursor: pointer;
+	border: 2px var(--color-1) solid;
+}
+
+.btn:hover {
+	background-color: var(--color-1-50);
+}

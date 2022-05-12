@@ -1,0 +1,17 @@
+<div style="position:relative">
+  <div class=" map-container">
+    <div class="map-frame">
+      <div id="map"></div>
+      <div class="user_info">
+        <small>Vous pouvez ajouter une ville en cliquant sur la carte</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="btnsContainer">
+    <div *ngFor="let layer of MapService.layers" class="btn" (click)="MapService.addMapLayer(layer.layer_name)"
+      [class]=" layer.mapL && layer.mapL._leaflet_id ? 'active'  : null ">
+      {{ layer.name}}
+    </div>
+  </div>
+</div>

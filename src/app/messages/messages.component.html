@@ -1,0 +1,7 @@
+<div *ngIf="messagesService.messages.length" class="msgPanel">
+    <div class="site_container">
+        <div *ngFor='let message of messagesService.messages' [innerHTML]="message"></div>
+
+        <button type="button" class="clear" (click)="messagesService.clear()">Fermer</button>
+    </div>
+</div>
