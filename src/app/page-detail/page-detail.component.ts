@@ -49,9 +49,7 @@ export class PageDetailComponent implements OnInit {
 			});
 		}
 	}
-	// getFlag(country: string): string {
-	// 	return 'https://flagcdn.com/16x12/' + country.toLowerCase() + '.png';
-	// }
+
 	getTileLink(): string {
 		return '/' + this.ws_result.name.toLowerCase();
 	}

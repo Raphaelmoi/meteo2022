@@ -84,7 +84,7 @@ export class WeatherService {
 				weather.id = Math.abs(Math.round(lat * lon * 100000))
 			}
 		}
-		const exist = this.existInWeatherData(weather.id, weather.name, weather.coord.lat, weather.coord.lon);
+		const exist = this.existInWeatherData(weather.id, weather.coord.lat, weather.coord.lon);
 		if (exist !== -1) {
 			this.weather_data[exist] = weather;
 		} else {
@@ -112,11 +112,16 @@ export class WeatherService {
 		}
 		return t;
 	}
-	existInWeatherData(id: number, name: string = '', lat: number = 0, lon: number = 0): number {
+	existInWeatherData(id: number, lat: number = 0, lon: number = 0): number {
 		return this.weather_data.findIndex(
-			(el) => (el.coord.lon === lon && el.coord.lat === lat) || el.id === id || name === el.name
+			(el) => (el.coord.lon === lon && el.coord.lat === lat) || el.id === id
 		);
 	}
+	// existInWeatherData(id: number, name: string = '', lat: number = 0, lon: number = 0): number {
+	// 	return this.weather_data.findIndex(
+	// 		(el) => (el.coord.lon === lon && el.coord.lat === lat) || el.id === id || name === el.name
+	// 	);
+	// }
 	isExpired(data_dt: number): Boolean {
 		const weatherdataAge = Date.now() - data_dt * 1000;
 		return weatherdataAge > this.duration_before_refreshing_data;
