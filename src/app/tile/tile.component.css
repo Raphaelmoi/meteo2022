@@ -1,5 +1,5 @@
 .tile {
-	aspect-ratio: 1 / 1;
+	/* aspect-ratio: 1 / 1; */
 	background: linear-gradient(to right top, #e6ebf2, #cad8ec, var(--color-1-50), #6fa3da00, #cad8ec);
 	background-size: 100% 100%;
 	border: 2px solid var(--color-1-50);
@@ -14,7 +14,8 @@
 	text-decoration: none;
 	transition: 0.5s ease;
 }
-.tile > a {
+
+.tile>a {
 	color: inherit;
 	text-decoration: none;
 	display: flex;
@@ -23,17 +24,21 @@
 	width: 100%;
 	height: 100%;
 }
+
 @media all and (min-width: 1500px) {
 	.tile {
 		font-size: 1.2em;
 	}
 }
+
 .tile:hover {
 	background-size: 250% 250%;
 }
+
 .tile:hover .w_img img {
 	filter: drop-shadow(0 0 20px #0005);
 }
+
 .tile h2 {
 	text-transform: uppercase;
 	margin: 0;
@@ -42,17 +47,20 @@
 	overflow: hidden;
 	max-width: calc(100% - 2em);
 }
+
 .temp {
 	display: flex;
 	align-items: center;
 	margin: 0.5em 0 0;
 }
-.temp > span {
+
+.temp>span {
 	font-size: 3.4em;
 	margin: 0;
 	font-family: "Architects Daughter", cursive;
 	line-height: 1em;
 }
+
 .subtemp {
 	margin-left: 2em;
 	font-size: 0.5em;
@@ -61,14 +69,17 @@
 	text-align: left;
 	line-height: 1.1em;
 }
+
 .subtemp b {
 	font-size: 1.2em;
 }
+
 .w_img {
 	position: relative;
 	height: 200px;
 	width: 100%;
 }
+
 .w_img span {
 	position: absolute;
 	bottom: 0;
@@ -77,12 +88,14 @@
 	font-size: 0.7em;
 	text-transform: uppercase;
 }
+
 .w_img img {
 	height: 100%;
 	object-fit: contain;
 	transition: .5s ease;
 	filter: drop-shadow(0 0 1px #0005);
 }
+
 .w_placename {
 	display: flex;
 	align-items: center;
@@ -90,9 +103,11 @@
 	flex-wrap: wrap;
 	width: 100%;
 }
+
 .w_placename img {
 	margin: 0 8px;
 }
+
 .topbar_tile {
 	position: absolute;
 	top: 0.5em;
@@ -103,6 +118,7 @@
 	justify-content: space-between;
 	padding: 0 1em;
 }
+
 .btn_delete {
 	border: 1px;
 	padding: 4px 8px;
@@ -116,12 +132,14 @@
 	align-items: center;
 	justify-content: center;
 }
+
 .hour {
 	font-family: "Architects Daughter", cursive;
 	font-size: 1.8em;
 	line-height: 1em;
 	opacity: 0.8;
 }
+
 .bottom_infos {
 	display: flex;
 	align-items: center;
@@ -130,7 +148,8 @@
 	width: calc(100% - 1em);
 	margin-top: auto;
 }
-.bottom_infos > span {
+
+.bottom_infos>span {
 	border: 2px solid #8fb4e0;
 	background: #e6ebf2;
 	border-radius: 8px;
@@ -139,24 +158,28 @@
 	display: flex;
 	align-items: center;
 }
-.bottom_infos > span img {
+
+.bottom_infos>span img {
 	height: 20px;
 }
 
 .stationName {
 	font-size: .5em;
-	line-height: .5em;
+	line-height: 1em;
 	margin: 0;
 }
 
 .myPosition {
 	box-shadow: inset 0 0 0 2px var(--color-1);
 }
+
 @media all and (max-width: 1100px) {
 	.tile {
 		font-size: 2.7vw;
 	}
 }
+
+
 @media all and (max-width: 730px) {
 	.tile {
 		font-size: 1.1em;

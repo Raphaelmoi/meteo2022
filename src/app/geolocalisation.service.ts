@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
+import { WeatherService } from './weather.service';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class GeolocalisationService {
 	position_result_id: number = 0;
-	constructor() {
+
+	constructor(public WeatherService: WeatherService) {
 		const lsCityId = localStorage.getItem('position_city_id');
 		if (lsCityId) {
 			this.position_result_id = parseInt(lsCityId);
+		}
+		// refresh position if geolocation is allowed  
+		if (navigator.geolocation) {
+			setTimeout(() => {
+				this.askForGeolocalisation()
+			}, 3000);
 		}
 	}
 
@@ -25,5 +33,38 @@ export class GeolocalisationService {
 	setPositionResult(id: number): void {
 		this.position_result_id = id;
 		localStorage.setItem('position_city_id', this.position_result_id.toString());
+	}
+
+
+	async askForGeolocalisation(): Promise<void> {
+		return new Promise((resolve, reject) => {
+
+			this.getLocation().then((result: any) => {
+				if (result && result.coords && result.coords.latitude) {
+					this.WeatherService
+						.get_W_forCityByPosition(result.coords.latitude, result.coords.longitude)
+						.subscribe({
+							next: (data: any) => {
+								console.log("geo result : ");
+								console.log(data);
+
+
+								this.setPositionResult(data.id);
+								this.WeatherService.storeNewCity(data);
+								this.WeatherService.data_loading = false;
+							},
+							error: (err) => {
+								console.dir(err);
+								reject(new Error("Can't get location"));
+
+							},
+							complete: () => {
+								this.WeatherService.data_loading = false;
+								resolve()
+							}
+						});
+				}
+			});
+		})
 	}
 }

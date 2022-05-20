@@ -2,10 +2,12 @@
 	position: relative;
 	padding: 2em 0;
 }
-.header_site > * {
+
+.header_site>* {
 	position: relative;
 	z-index: 1;
 }
+
 .header_site::after {
 	content: "";
 	position: absolute;

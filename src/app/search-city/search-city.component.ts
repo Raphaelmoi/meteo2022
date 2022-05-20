@@ -25,24 +25,9 @@ export class SearchCityComponent implements OnInit {
 	ngOnInit(): void { }
 
 	askForGeolocalisation(): void {
-		this.GeolocalisationService.getLocation().then((result: any) => {
-			if (result && result.coords && result.coords.latitude) {
-				this.WeatherService.get_W_forCityByPosition(result.coords.latitude, result.coords.longitude).subscribe({
-					next: (data: any) => {
-						this.GeolocalisationService.setPositionResult(data.id);
-						this.WeatherService.storeNewCity(data);
-						this.WeatherService.data_loading = false;
-					},
-					error: (err) => {
-						console.dir(err);
-					},
-					complete: () => {
-						this.city_input = '';
-						this.WeatherService.data_loading = false;
-					}
-				});
-			}
-		});
+		this.GeolocalisationService.askForGeolocalisation().then((res: any) => {
+			this.city_input = '';
+		})
 	}
 
 	search_action(): void {
