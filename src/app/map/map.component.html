@@ -9,7 +9,7 @@
   </div>
 
   <div class="btnsContainer">
-    <div *ngFor="let layer of MapService.layers" class="btn" (click)="MapService.addMapLayer(layer.layer_name)"
+    <div *ngFor="let layer of MapService.layers" class="btn" (click)="MapService.toggleMapLayer(layer.layer_name)"
       [class]=" layer.mapL && layer.mapL._leaflet_id ? 'active'  : null ">
       {{ layer.name}}
     </div>

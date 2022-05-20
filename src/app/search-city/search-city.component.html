@@ -5,35 +5,25 @@
         </a>
     </div>
     <div>
-        <input 
-            type="text" 
-            placeholder="Rechercher une ville"  
-            [value]="city_input" 
-            (keydown)="onKey($event)" 
-            (keyup.enter)="search_action()"
-        />
+        <input type="text" placeholder="Rechercher une ville" [value]="city_input" (keydown)="onKey($event)"
+            (keyup.enter)="search_action()" />
         <button (click)="search_action()">
             <img src="/assets/icones/loupe.svg" width="20" height="20" />
         </button>
 
         <div class="cities_autocomplete" *ngIf="CityService.cities_autocomplete && city_input">
-            <div 
-                *ngFor="let i of CityService.cities_autocomplete; let index = index" 
-                (click)="search(i)"  
+            <div *ngFor="let i of CityService.cities_autocomplete; let index = index" (click)="search(i)"
                 (mousemove)="result_focus = index ; city_input = CityService.cities_autocomplete[result_focus].nom"
-                [class]="result_focus === index ? 'active' : null" 
-                >
-                {{i.nom}} 
+                [class]="result_focus === index ? 'active' : null">
+                {{i.nom}}
                 <span *ngIf="i.departement">
                     ({{i.departement.code}} - {{ i.departement.nom}} )
                 </span>
             </div>
         </div>
     </div>
-    <button (click)="askForGeolocalisation()" class="btnGeo" >
+    <button (click)="OnClickForGeolocation()" class="btnGeo">
         <img src="/assets/icones/geoloc.svg" width="30" height="30" />
         Ma position
     </button>
 </div>
-
-

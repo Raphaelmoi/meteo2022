@@ -12,10 +12,10 @@ export class GeolocalisationService {
 		if (lsCityId) {
 			this.position_result_id = parseInt(lsCityId);
 		}
-		// refresh position if geolocation is allowed  
+		// ask for geolocation or refresh position if its allowed  
 		if (navigator.geolocation) {
 			setTimeout(() => {
-				this.askForGeolocalisation()
+				this.askForGeolocation()
 			}, 3000);
 		}
 	}
@@ -35,28 +35,20 @@ export class GeolocalisationService {
 		localStorage.setItem('position_city_id', this.position_result_id.toString());
 	}
 
-
-	async askForGeolocalisation(): Promise<void> {
+	async askForGeolocation(): Promise<void> {
 		return new Promise((resolve, reject) => {
-
 			this.getLocation().then((result: any) => {
 				if (result && result.coords && result.coords.latitude) {
 					this.WeatherService
 						.get_W_forCityByPosition(result.coords.latitude, result.coords.longitude)
 						.subscribe({
 							next: (data: any) => {
-								console.log("geo result : ");
-								console.log(data);
-
-
 								this.setPositionResult(data.id);
 								this.WeatherService.storeNewCity(data);
 								this.WeatherService.data_loading = false;
 							},
 							error: (err) => {
-								console.dir(err);
 								reject(new Error("Can't get location"));
-
 							},
 							complete: () => {
 								this.WeatherService.data_loading = false;

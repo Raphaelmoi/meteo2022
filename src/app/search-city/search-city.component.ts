@@ -24,8 +24,8 @@ export class SearchCityComponent implements OnInit {
 
 	ngOnInit(): void { }
 
-	askForGeolocalisation(): void {
-		this.GeolocalisationService.askForGeolocalisation().then((res: any) => {
+	OnClickForGeolocation(): void {
+		this.GeolocalisationService.askForGeolocation().then((res: any) => {
 			this.city_input = '';
 		})
 	}

@@ -27,14 +27,9 @@ export class MapService {
 		L.tileLayer(fondDeCarte2, {
 			attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		}).addTo(this.map);
-		// this.addMapLayer("temp_new")//https://openweathermap.org/api/weathermaps#urlformat
-
-
 	}
 
-	addMapLayer(layer: string): void {
-		console.log("addMapLayer");
-
+	toggleMapLayer(layer: string): void {
 		const fondDeCarte =
 			`https://tile.openweathermap.org/map/
 				${layer}/{z}/{x}/{y}.png?opacity=1&appid=
@@ -66,7 +61,8 @@ export class MapService {
 	initMarkers(): void {
 		this.WeatherService.weather_data.forEach((element: any) => {
 			this.markers.push(
-				L.marker([element.coord.lat, element.coord.lon], { icon: this.getIcon(element.weather[0].icon) })
+				L.marker([element.coord.lat, element.coord.lon],
+					{ icon: this.getIcon(element.weather[0].icon, element.main.temp) })
 					.bindPopup(
 						`<a href="${this.UtilsService.getPageLink(element)}">
 							<img src="${this.WeatherService.getWeatherIcon(element.weather[0].icon, 2)}" alt='' height='100'/>
@@ -80,14 +76,23 @@ export class MapService {
 		});
 	}
 
-	getIcon(icon: string) {
-		return L.icon({
-			iconUrl: this.WeatherService.getWeatherIcon(icon, 2),
+	getIcon(icon: string, temperature: number) {
+		// return L.icon({
+		// 	iconUrl: this.WeatherService.getWeatherIcon(icon, 2),
+		// 	iconSize: [50, 50],
+		// 	iconAnchor: [25, 15]
+		// 	// iconUrl: 'assets/icones/marker.svg',
+		// 	// shadowUrl: 'assets/leaflet/marker-shadow.png',
+		// });
+		return new L.DivIcon({
+			className: 'mapIcon',
 			iconSize: [50, 50],
-			iconAnchor: [25, 15]
-			// iconUrl: 'assets/icones/marker.svg',
-			// shadowUrl: 'assets/leaflet/marker-shadow.png',
-		});
+			iconAnchor: [25, 15],
+			html:
+				'<img class="my-div-image" src="' + this.WeatherService.getWeatherIcon(icon, 2) + '"/>' +
+				'<span class="my-div-span">' + Math.round(temperature) + '°</span>'
+		})
+
 	}
 
 	mapClic(): void {
