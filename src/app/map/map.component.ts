@@ -11,23 +11,14 @@ export class MapComponent implements AfterViewInit {
 	@Input() tiles_length: number = 0;
 	@Input() zoomto: any = {};
 
-	// layers: any[] = [
-	// 	{ name: 'Nuages', layer_name: 'clouds_new', mapL: {} },
-	// 	{ name: 'Précipitations', layer_name: 'precipitation_new', mapL: {} },
-	// 	{ name: 'Pression niveau mer', layer_name: 'pressure_new', mapL: {} },
-	// 	{ name: 'Vitesse du vent', layer_name: 'wind_new', mapL: {} },
-	// 	{ name: 'Température', layer_name: 'temp_new', mapL: {} },
-	// ]
 	ngAfterViewInit(): void {
 		this.MapService.initMap();
 		this.MapService.initMarkers();
-
 		this.MapService.mapClic();
+
 		if (this.zoomto && this.zoomto.lat) {
 			this.MapService.centerMap(this.zoomto.lat, this.zoomto.lon);
 		}
-
-
 	}
 
 	ngOnChanges(changes: SimpleChanges) {

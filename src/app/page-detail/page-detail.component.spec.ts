@@ -13,9 +13,9 @@ describe('PageDetailComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [ RouterTestingModule, HttpClientTestingModule ],
-			declarations: [ PageDetailComponent ],
-			providers: [ WeatherService, MessagesService ]
+			imports: [RouterTestingModule, HttpClientTestingModule],
+			declarations: [PageDetailComponent],
+			providers: [WeatherService, MessagesService]
 		}).compileComponents();
 	});
 
@@ -28,4 +28,8 @@ describe('PageDetailComponent', () => {
 	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
+
+	// it('should return true if item is a favorite', () => {
+	// 	expect(component.isFavorite()).toBeTruthy();
+	// });
 });

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { MessagesService } from './messages.service';
 import { Weather } from './weather';
-import { timeout } from 'rxjs';
+import { Observable, timeout } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
@@ -13,7 +13,7 @@ export class WeatherService {
 	duration_before_refreshing_data: number = 60000 * 1; // 1 minute
 	localStorageName: string = 'citiesFull';
 	data_loading: boolean = false;
-
+	api_base: string = 'https://api.openweathermap.org/data/2.5/'
 	constructor(private http: HttpClient, private messagesService: MessagesService) { }
 
 	getFlag(country: string): string {
@@ -22,29 +22,27 @@ export class WeatherService {
 	getWeatherIcon(icon: string, size: number = 4) {
 		return 'https://openweathermap.org/img/wn/' + icon + '@' + size + 'x.png';
 	}
-	get_W_forCityByName(city: string) {
+	getUrl(type: string, query: string) {
+		return `${this.api_base}${type}?appid=${this.apiKey}&units=metric&&lang=fr&${query}`;
+	}
+	get_W_forCityByName(city: string): Observable<Object> {
 		this.data_loading = true;
-		// let base = 'http://api.openweathermap.org/data/2.5/forecast?APPID='
-		let base = `https://api.openweathermap.org/data/2.5/weather?appid=${this
-			.apiKey}&units=metric&&lang=fr&q=${city}`;
+		let base = this.getUrl('weather', 'q=' + city)
 		return this.http.get(base);
 	}
 	get_W_forCityByPosition(latitude: number, longitude: number) {
 		this.data_loading = true;
-		let base = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this
-			.apiKey}&units=metric&&lang=fr`;
+		let base = this.getUrl('weather', `lat=${latitude}&lon=${longitude}`)
 		return this.http.get(base);
 	}
 	get_W_forCityById(id: number) {
 		this.data_loading = true;
-		let base = `https://api.openweathermap.org/data/2.5/weather?appid=${this
-			.apiKey}&units=metric&&lang=fr&id=${id}`;
+		let base = this.getUrl('weather', `id=${id}`)
 		return this.http.get(base);
 	}
 	get_F_forCityById(id: number) {
 		this.data_loading = true;
-		let base = `https://api.openweathermap.org/data/2.5/forecast?appid=${this
-			.apiKey}&units=metric&&lang=fr&id=${id}`;
+		let base = this.getUrl('forecast', `id=${id}`)
 		return this.http.get(base);
 	}
 	getCities() {
@@ -117,14 +115,9 @@ export class WeatherService {
 			(el) => (el.coord.lon === lon && el.coord.lat === lat) || el.id === id
 		);
 	}
-	// existInWeatherData(id: number, name: string = '', lat: number = 0, lon: number = 0): number {
-	// 	return this.weather_data.findIndex(
-	// 		(el) => (el.coord.lon === lon && el.coord.lat === lat) || el.id === id || name === el.name
-	// 	);
-	// }
 	isExpired(data_dt: number): Boolean {
-		const weatherdataAge = Date.now() - data_dt * 1000;
-		return weatherdataAge > this.duration_before_refreshing_data;
+		const weatherdataAge = Date.now() - (data_dt * 1000);
+		return weatherdataAge >= this.duration_before_refreshing_data;
 	}
 	deleteCity(id: number): void {
 		if (this.existInWeatherData(id) === -1) {

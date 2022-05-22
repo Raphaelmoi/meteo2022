@@ -5,13 +5,7 @@
 	gap: 2em;
 	grid-auto-flow: row dense;
 	margin-bottom: 2em;
-	/* grid-auto-rows: 350px; */
 }
-/* @media all and (min-width: 1500px ){
-  .grid_weather {
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-  }
-} */
 
 .welcomeMsg {
 	text-align: center;
@@ -20,6 +14,20 @@
 	flex-direction: column;
 	align-items: center;
 }
+
+.welcomeMsg div {
+	width: 800px;
+	max-width: 100%;
+	text-align: left;
+	font-size: .9em;
+}
+
+.btnDeleteContainer {
+	display: flex;
+	font-size: .7em;
+	margin: 0 0 8px
+}
+
 @media all and (max-width: 1200px) {
 	.grid_weather {
 		grid-gap: 1em;

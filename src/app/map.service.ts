@@ -38,8 +38,6 @@ export class MapService {
 		const index = this.layers.findIndex((el) => el.layer_name === layer)
 
 		if (index !== -1) {
-			console.log(this.layers[index].mapL);
-
 			if (this.layers[index].mapL && this.layers[index].mapL._leaflet_id) {
 				this.map.removeLayer(this.layers[index].mapL)
 				this.layers[index].mapL = {}
@@ -47,7 +45,6 @@ export class MapService {
 				this.layers[index].mapL = L.tileLayer(fondDeCarte)
 				this.layers[index].mapL.addTo(this.map);
 			}
-
 		}
 	}
 	deleteMapLayer(layer: string): void {
