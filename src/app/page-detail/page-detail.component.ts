@@ -31,8 +31,6 @@ export class PageDetailComponent implements OnInit {
 		if (id) {
 			this.WeatherService.get_W_forCityById(id).subscribe({
 				next: (data: any) => {
-					// this.WeatherService.deleteCity(data.id);
-					// this.WeatherService.storeNewCity(data);
 					this.ws_result = data;
 				},
 				error: (err) => {
@@ -43,7 +41,7 @@ export class PageDetailComponent implements OnInit {
 					this.WeatherService.data_loading = false;
 				},
 				complete: () => {
-					this.getForecastForDay();
+					this.getForecastFoNextHours();
 					this.WeatherService.data_loading = false;
 				}
 			});
@@ -53,7 +51,7 @@ export class PageDetailComponent implements OnInit {
 	getTileLink(): string {
 		return '/' + this.ws_result.name.toLowerCase();
 	}
-	getForecastForDay(): void {
+	getForecastFoNextHours(): void {
 		this.WeatherService.get_F_forCityById(this.ws_result.id).subscribe({
 			next: (data: any) => {
 				this.forecast.push(data);
@@ -67,6 +65,7 @@ export class PageDetailComponent implements OnInit {
 				this.WeatherService.data_loading = false;
 			}
 		});
+
 	}
 	getMinMaxTemperature(): void {
 		if (!this.forecast.length) {
@@ -86,9 +85,7 @@ export class PageDetailComponent implements OnInit {
 	scrollManager(direction: number, event: any) {
 		event.preventDefault();
 		const move_width: number = Math.round(window.innerWidth * 0.75);
-
 		let h_scroll_position: number = move_width * direction;
-
 		this.element.nativeElement.getElementsByClassName('h_scroller')[0].scrollLeft += h_scroll_position;
 	}
 
