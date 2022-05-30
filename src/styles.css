@@ -102,7 +102,7 @@ a {
 }
 
 .mapIcon span {
-	background: white;
+	background: rgba(255, 255, 255, 0.75);
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
@@ -112,7 +112,7 @@ a {
 	line-height: 23px;
 	margin: -30px auto 0;
 	font-weight: bold;
-	border: 2px #000 solid;
+	border: 2px rgba(0, 0, 0, 0.75)  solid;
 	position: relative;
 }
 

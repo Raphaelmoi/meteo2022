@@ -25,4 +25,9 @@ describe('HomeComponent', () => {
 	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
+
+	it('should have a welcome message and indications if no result', () => {
+		// const res = WeatherService.weather_data.length
+		// expect(component).toBeTruthy();
+	});
 });
